@@ -31,7 +31,7 @@ void DisplayMenu()
 {
 	int option = 0;
 
-	while (true)
+	while (1)
 	{
 		printf("1) Add a new car to the showroom\n");
 		printf("2) Sell a car from the showroom\n");
@@ -45,7 +45,7 @@ void DisplayMenu()
 
 		scanf("%d", &option);
 
-		switch (choice)
+		switch (option)
 		{
 		case 1:
 			addCar();
@@ -85,8 +85,8 @@ void DisplayMenu()
 
 void main()
 {
-	displayMenu();
-	getchar;
+	DisplayMenu();
+	getchar();
 }
 
 // calling all my methods which are needed for thr question
