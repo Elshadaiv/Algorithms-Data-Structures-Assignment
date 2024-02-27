@@ -1,11 +1,10 @@
 
 #define _CRT_SECURE_NO_WARNINGS 1
 #define bool int
-#define false 0
-
+#define SIZE 5
 #include <stdio.h>
 #include <stdlib.h>
-#include <cstddef>
+#include <cstddef>4
 
 #struct Car
 {
