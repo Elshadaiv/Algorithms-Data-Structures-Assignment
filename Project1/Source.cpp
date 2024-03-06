@@ -27,7 +27,45 @@ struct LinearNode* front = NULL;
 struct LinearNode* last = NULL;
  
 
-void DisplayMenu()
+
+// calling all my methods which are needed for thr question
+void addCar() 
+{
+
+}
+
+void sellCar()
+{
+
+}
+
+void reserveCar()
+{
+
+}
+
+void unreserveCar()
+{
+
+}
+
+void viewAllCars()
+{
+
+}
+
+void viewSpecificCar()
+{
+
+}
+
+void exit()
+{
+		printf("Thank you!");
+		return 0;
+}
+
+int main()
 {
 	int option = 0;
 
@@ -81,49 +119,6 @@ void DisplayMenu()
 		}
 		
 	}
-}
-
-void main()
-{
-	DisplayMenu();
-	getchar();
-}
-
-// calling all my methods which are needed for thr question
-void addCar() 
-{
-
-}
-
-void sellCar()
-{
-
-}
-
-void reserveCar()
-{
-
-}
-
-void unreserveCar()
-{
-
-}
-
-void viewAllCars()
-{
-
-}
-
-void viewSpecificCar()
-{
-
-}
-
-void exit()
-{
-		printf("Thank you!");
-		return 0;
 }
 	
 
