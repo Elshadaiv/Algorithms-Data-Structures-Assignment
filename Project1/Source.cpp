@@ -17,11 +17,11 @@
 	float sale; //Special FEATURE
 };
 
-struct Node 
+struct LinearNode
 {
-	struct Data *element;
+	struct Car* element;
 	struct LinearNode *link;
-};
+}; // ive made a change to this and below made the errors go away but need to find a better soloution
 
 
 struct LinearNode* last = NULL;
@@ -29,23 +29,43 @@ struct LinearNode* last = NULL;
 
 void addCar() 
 {
-struct Node *front = NULL;
-	//Node* carNode = (Node*)malloc(sizeof(struct Node));
+int i;
+	struct LinearNode *carNode;
+	struct Car *anElement;
+
+	  anElement = (struct Car *)malloc(sizeof(struct Car));
+	  carNode = (struct LinearNode *)malloc(sizeof(struct LinearNode));
+	// this is making car have to -> element to the car model, car reg etc
 
 
+	for(i=0; i< SIZE; i++)
+{
 	printf("Enter car registration by (yyDxnnnn)");
-	scanf("%9s", carNode ->Registration);
+	scanf("%9s", carNode ->element->Registration);
 
 
-	if(!isValidRegistration(carNode -> Redistration))
+	if(!isValidRegistration(carNode ->Redistration))
 	{
 		printf("Invalid Registration");
 		return;
 	}
 
 	printf("Enter the car make and model");
-	scanf("%s", carNode ->make_model);
-}
+	scanf("%s", carNode ->element->make_model);
+
+
+	printf("Enter the car colour");
+	scanf("%s", carNode->element->colour);
+
+
+	printf("Enter the number of previous owners (between 0-3)");
+	scanf("%d", &carNode ->element->previous_owners);
+
+	if(carNode ->element-> previous_owners < 0 || carNode -> element->previous_owners > 3)
+	{
+		printf("This is a invalid number of previous owners");
+		return;
+	}
 
 void sellCar()
 {
