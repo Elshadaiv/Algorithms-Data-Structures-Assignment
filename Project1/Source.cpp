@@ -17,21 +17,34 @@
 	float sale; //Special FEATURE
 };
 
-struct LinearNode 
+struct Node 
 {
 	struct Data *element;
-	struct LinearNode *next;
+	struct LinearNode *link;
 };
 
-struct LinearNode* front = NULL;
+
 struct LinearNode* last = NULL;
  
 
-
-// calling all my methods which are needed for thr question
 void addCar() 
 {
+struct Node *front = NULL;
+	//Node* carNode = (Node*)malloc(sizeof(struct Node));
 
+
+	printf("Enter car registration by (yyDxnnnn)");
+	scanf("%9s", carNode ->Registration);
+
+
+	if(!isValidRegistration(carNode -> Redistration))
+	{
+		printf("Invalid Registration");
+		return;
+	}
+
+	printf("Enter the car make and model");
+	scanf("%s", carNode ->make_model);
 }
 
 void sellCar()
