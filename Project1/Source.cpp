@@ -67,6 +67,24 @@ int i;
 		return;
 	}
 
+	printf("Is car reserved?");
+	scanf("%d", carNode ->element-> reserved);
+
+//add boolean indicator
+
+	carNode ->element->reserveAmount = 0.0;
+
+	if(carNode ->element->reserved)
+{
+	printf("Reserbed amount");
+	scanf("%d", &carNode->element->reserveAmount);
+
+	if(carNode ->element->reserveAmount < 500.00 || carNode ->element->reserveAmount >1500.0)
+	{
+		printf("This amount is invalid");
+		return;
+	}
+
 void sellCar()
 {
 
@@ -95,7 +113,7 @@ void viewSpecificCar()
 void exit()
 {
 		printf("Thank you!");
-		return 0;
+
 }
 
 int main()
