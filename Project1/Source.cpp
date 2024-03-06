@@ -85,6 +85,34 @@ int i;
 		return;
 	}
 
+if(carNode ->element->reserveAmount < 500.00 || carNode ->element->reserveAmount >1500.0)
+	{
+		printf("This amount is invalid");
+		return;
+	}
+}
+
+	if(carNode == NULL)
+	{
+	printf("There's no space for new cars");
+	}
+	else 
+{
+		carNode->link = NULL;
+		 	carNode->element = anElement;
+	
+			if (isEmpty())  
+			{
+				front = carNode;
+				last = carNode;
+		    }
+			else
+			 {
+				carNode->link = front;
+				front = carNode;
+
+}	
+
 void sellCar()
 {
 
