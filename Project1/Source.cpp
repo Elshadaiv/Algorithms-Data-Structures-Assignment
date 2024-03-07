@@ -130,7 +130,10 @@ void unreserveCar()
 
 void viewAllCars()
 {
+	struct LinearNode *current;
 
+	printf("1) View all Cars/n");
+	printf("2) View car with specific type")
 }
 
 void viewSpecificCar()
