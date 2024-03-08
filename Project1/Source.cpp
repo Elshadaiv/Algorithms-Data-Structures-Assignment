@@ -116,6 +116,15 @@ if(carNode ->element->reserveAmount < 500.00 || carNode ->element->reserveAmount
 void sellCar()
 {
 
+		struct LinearNode*current;
+		current = front;
+			struct LinearNode*previous = NULL;
+
+			if(current->element->Registration)
+			{
+			front = front->link;
+					free(current);
+			}
 }
 
 void reserveCar()
@@ -152,15 +161,13 @@ int main()
 	int option = 0;
 
 	while (1)
-	{
-		printf("1) Add a new car to the showroom\n");
+	{printf("1) Add a new car to the showroom\n");
 		printf("2) Sell a car from the showroom\n");
-		printf("3) Reserve a car in the showroom\n");
-		printf("4)  Unreserve a car in the showroom\n");
-		printf("5) View all cars in the showroom\n");
-		printf("6) View a specific car in the showroom\n");
-		printf("7) ShowRoom Sale\n"); //Special Feature
-		printf("8) Exit\n");
+		printf("3) Reserved/Unreserved a car in the showroom\n");
+		printf("4) View all cars in the showroom\n");
+		printf("5) View a specific car in the showroom\n");
+		printf("6) ShowRoom Sale\n"); //Special Feature
+		printf("7) Exit\n");
 		printf("Which will you like to choose: ");
 
 		scanf("%d", &option);
@@ -176,26 +183,22 @@ int main()
 			break;
 
 		case 3:
-			reserveCar();
+			reserved();
 			break;
 
 		case 4:
-			unreserveCar();
-			break;
-
-		case 5:
 			viewAllCars();
 			break;
 
-		case 6:
+		case 5:
 			viewSpecificCar();
 			break;
 
-		case 7:
+		case 6:
 			SP();
 			break;
 
-		case 8:
+		case 7:
 			exit();
 			break;
 		}
