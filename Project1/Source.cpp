@@ -120,7 +120,7 @@ void sellCar()
 		current = front;
 			struct LinearNode*previous = NULL;
 
-			if(current->element->Registration)
+			if(current->element->Reserved
 			{
 			front = front->link;
 					free(current);
