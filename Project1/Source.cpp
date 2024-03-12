@@ -166,33 +166,12 @@ if(carNode ->element->reserveAmount < 500.00 || carNode ->element->reserveAmount
 
 void sellCar()
 {
-struct LinearNode*current;
-		current = front;
-			struct LinearNode*previous = NULL;
+// My sell car isnt whats required so I need to redo this part again
 
-			if(current->element->reserved)
-			{
-			front = current->link;
-					free(current);
-			}
-			
-			else if (current == last){
-					last = previous;
-					last->link=NULL;
-					free(current);
-				}
-				else { 
-						previous->link= current->link;
-						free(current);
-	}
+	
 }
 
 void reserveCar()
-{
-
-}
-
-void unreserveCar()
 {
 
 }
