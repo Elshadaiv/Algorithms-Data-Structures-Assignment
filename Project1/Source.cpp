@@ -47,7 +47,7 @@ int i;
 	for(i=0; i< SIZE; i++)
 {
 	printf("Enter car registration by (yyDxnnnn)");
-	scanf("%9s", carNode ->element->Registration);
+	scanf("%8s", carNode ->element->Registration);
 
 
 	if(!isValidRegistration(carNode ->Redistration))
@@ -121,16 +121,25 @@ if(carNode ->element->reserveAmount < 500.00 || carNode ->element->reserveAmount
 
 void sellCar()
 {
-
-		struct LinearNode*current;
+struct LinearNode*current;
 		current = front;
 			struct LinearNode*previous = NULL;
 
-			if(current->element->Reserved
+			if(current->element->reserved)
 			{
-			front = front->link;
+			front = current->link;
 					free(current);
 			}
+			
+			else if (current == last){
+					last = previous;
+					last->link=NULL;
+					free(current);
+				}
+				else { 
+						previous->link= current->link;
+						free(current);
+	}
 }
 
 void reserveCar()
@@ -145,10 +154,18 @@ void unreserveCar()
 
 void viewAllCars()
 {
-	struct LinearNode *current;
+	struct LinearNode*current;
 
-	printf("1) View all Cars/n");
-	printf("2) View car with specific type")
+	current = front;
+	while(current !=NULL)
+	{
+		("Registration %s, Make and Model %s, Colour %s, Previous Owners %d",  current->element->Registration, current->element->make_model, current->element->colour, current->element->previous_owners);
+		current = current->link;
+	}
+	if (isEmpty())
+	{
+		printf("There is no cars.\n");
+	}
 }
 
 void viewSpecificCar()
@@ -161,6 +178,11 @@ void exit()
 		printf("Thank you!");
 
 }
+
+void SP()
+	{
+
+	}
 
 int main()
 {
