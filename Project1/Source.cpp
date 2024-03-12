@@ -21,12 +21,18 @@ struct LinearNode
 {
 	struct Car* element;
 	struct LinearNode *link;
-}; // ive made a change to this and below made the errors go away but need to find a better soloution
+};
 
 
+struct LinearNode* front = NULL;
 struct LinearNode* last = NULL;
- 
 
+bool isEmpty() {
+	if (front == NULL)
+		return true;
+	else
+		return false;
+}
 void addCar() 
 {
 int i;
