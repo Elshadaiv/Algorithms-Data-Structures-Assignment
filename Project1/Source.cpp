@@ -4,7 +4,9 @@
 #define SIZE 5
 #include <stdio.h>
 #include <stdlib.h>
-#include <cstddef>4
+#include <stdbool.h>
+#include <string.h>
+#define false 0 // Why do i have to add this so the errors on the return statement are not mark as erros?
 
 #struct Car
 {
@@ -16,6 +18,49 @@
 	double reserveAmount;
 	float sale; //Special FEATURE
 };
+
+bool isValidRegistration (const char*Registration)
+{
+	
+	if(strlen(Registration)!=8) // reg string is 8 characters long
+	{
+	return false;
+	}
+	
+	for(int i = 0; i< 2; i++) // first 2 are valid years
+	{
+		if((Registration[i] < '0' || Registration[i] > '9'))
+		{
+			return false;
+		}
+	}
+
+	if(Registration[2] != 'D') // D for dublin
+	{
+		return false;
+	}
+
+	if(Registration[3] != '1' && Registration[3] !='2') // 4 car 1 or 2
+	{
+		return false;
+	}
+
+	for(int i = 4; i < 8; i++) // last 4 are digits 
+	{
+		if((Registration[i] <'0' || Registration[i] > '9'))
+		{
+			return false;
+		}
+	}
+
+	int year = atoi(Registration); //valid year of 14 - 24
+	if(year <14 || year > 24)
+	{
+		return false;
+	}
+
+return true;
+
 
 struct LinearNode
 {
