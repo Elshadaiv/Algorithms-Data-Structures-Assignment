@@ -173,11 +173,6 @@ void sellCar()
 		printf("Enter the Registration number you wish to sell");
 		scanf("%9s", Registration);
 
-		if(strlen(Registration)!=8) // reg string is 8 characters long
-	{
-		printf("This is an invalid registration, try again\n");
-		return;
-	}
 		while(current != NULL)
 		{
 			if(strcmp(current ->element-> Registration, Registration) == 0)
