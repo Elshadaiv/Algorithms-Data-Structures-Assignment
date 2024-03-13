@@ -21,12 +21,6 @@
 
 bool isValidRegistration (const char*Registration)
 {
-	
-	if(strlen(Registration)!=8) // reg string is 8 characters long
-	{
-	return false;
-	}
-	
 	for(int i = 0; i< 2; i++) // first 2 are valid years
 	{
 		if((Registration[i] < '0' || Registration[i] > '9'))
@@ -92,65 +86,66 @@ int i;
 	for(i=0; i< SIZE; i++)
 {
 	printf("Enter car registration by (yyDxnnnn)");
-	scanf("%8s", carNode ->element->Registration);
+	scanf("%8s", &anElement->Registration);
+
+if(strlen(anElement->Registration)!=8) // reg string is 8 characters long
+	{
+		printf("This is an invalid registration, try again");
+		free(anElement);
+		free(carNode);
+	return false;
 
 
-	if(!isValidRegistration(carNode ->Redistration))
+
+	if(!isValidRegistration(anElement ->Redistration))
 	{
 		printf("Invalid Registration");
 		return;
 	}
 
 	printf("Enter the car make and model");
-	scanf("%s", carNode ->element->make_model);
+	scanf("%s",&anElement->make_model);
 
 
 	printf("Enter the car colour");
-	scanf("%s", carNode->element->colour);
+	scanf("%s", anElement->colour);
 
 
 	printf("Enter the number of previous owners (between 0-3)");
-	scanf("%d", &carNode ->element->previous_owners);
+	scanf("%d", &anElement->previous_owners);
 
-	if(carNode ->element-> previous_owners < 0 || carNode -> element->previous_owners > 3)
+	if(anElement-> previous_owners < 0 || anElement->previous_owners > 3)
 	{
 		printf("This is a invalid number of previous owners");
 		return;
 	}
 
 	printf("Is car reserved?");
-	scanf("%d", carNode ->element-> reserved);
+	scanf("%d",anElement-> reserved);
 
 //add boolean indicator
 
-	carNode ->element->reserveAmount = 0.0;
+	 anElement->reserveAmount = 0.0;
 
-	if(carNode ->element->reserved)
+	if(anElement->reserved)
 {
 	printf("Reserbed amount");
-	scanf("%d", &carNode->element->reserveAmount);
+	scanf("%d", &anElement->reserveAmount);
 
-	if(carNode ->element->reserveAmount < 500.00 || carNode ->element->reserveAmount >1500.0)
+	if(anElement->reserveAmount < 500.00 || anElement->reserveAmount >1500.0)
 	{
 		printf("This amount is invalid");
 		return;
 	}
 
-if(carNode ->element->reserveAmount < 500.00 || carNode ->element->reserveAmount >1500.0)
-	{
-		printf("This amount is invalid");
-		return;
-	}
-}
-
-	if(carNode == NULL)
+	if(anElement == NULL)
 	{
 	printf("There's no space for new cars");
 	}
 	else 
 {
-		carNode->link = NULL;
 		 	carNode->element = anElement;
+			carNode->link = NULL;
 	
 			if (isEmpty())  
 			{
@@ -166,9 +161,39 @@ if(carNode ->element->reserveAmount < 500.00 || carNode ->element->reserveAmount
 
 void sellCar()
 {
-// My sell car isnt whats required so I need to redo this part again
+const char* Registration;
+		struct LinearNode*current;
+		current = front;
+		struct LinearNode* previous = NULL;	
+		
+		printf("Enter the Registration number you wish to sell");
+		scanf("%8s", &Registration);
 
-	
+		while(current != NULL)
+		{
+			if(previous == NULL)
+			{
+				front = current ->link;
+			}
+			else {
+				previous ->link = current ->link;
+			}
+
+			if(strcmp(current ->element-> Registration, Registration) == 0)
+			{
+				printf("Car reg '%s' sold.\n", &Registration);
+				free(current->element);
+				return;
+			}
+			else 
+			{
+				printf("Car reg '%s' is not reserved and will not be sold\n", &Registration);
+				return;
+			}
+		}
+		previous = current;
+        current = current->link;
+}
 }
 
 void reserveCar()
@@ -205,7 +230,7 @@ void exit()
 
 void SP()
 	{
-
+		// special feature
 	}
 
 int main()
