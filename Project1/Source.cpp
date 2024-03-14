@@ -142,26 +142,29 @@ do{
  // if the reserved car in the list is between 500/1500 i will be stored
 
 
+carNode->element = anElement;
+
 	if(anElement == NULL)
 	{
 	printf("There's no space for new cars");
-	}
-	else 
-{
-		 	carNode->element = anElement;
-			carNode->link = NULL;
+	} // null = no space for car
+	else {
+		carNode->link = NULL;
+		 	
 	
-			if (isEmpty())  
+			if (front== NULL)  
 			{
 				front = carNode;
 				last = carNode;
 		    }
 			else
 			 {
-				carNode->link = front;
-				front = carNode;
+				last->link = carNode;
+				last = carNode;
 
 }	
+}
+}
 
 void sellCar()
 {
