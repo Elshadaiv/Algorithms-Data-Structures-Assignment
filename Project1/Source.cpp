@@ -290,7 +290,7 @@ void viewSpecificCar()
 void exit()
 {
 		printf("Thank you!");
-
+		exit(0);
 }
 
 void SP()
@@ -300,51 +300,28 @@ void SP()
 
 int main()
 {
+FILE* fptr;
+fptr = fopen("car.dat", "rb");
 
-	//File handling method
-	FILE* fptr;
-	fptr = fopen("car.dat", "rb");
-
-	if(fptr == NULL)
-	{
-		printf("The File 'car.dat' does not exist, you'll need to input cars to the list\n");
-	}
-
-	else
-	{
-		printf("The file 'car.dat' does exist\n.");
-
-		struct Car temporaryCar;
-		while (fread(&temporaryCar, sizeof(struct Car), 1, fptr) == 1) {
-			struct Car* newCar = (struct Car*)malloc(sizeof(struct Car));
-			if(newCar == NULL)
-			{
-				printf("Allocation failed.\n");
-				fclose(fptr);
-				return 1;
-			}
-
-			memcpy(newCar, &temporaryCar, sizeof(struct Car));
-			struct LinearNode* newNode = (struct LinearNode*)malloc(sizeof(struct LinearNode));
-
-			if(newNode == NULL)
-			{
-				printf("Allocation failed.\n");
-				fclose(fptr);
-				free(newCar);
-				exit(1);
-			}
-
-			newNode->element = newCar;
-			newNode->link = front;
-			front = newNode;
-			}
-
-			printf("Cars are loaded\n");
-			fclose(fptr);
-			
-	}
+if (fptr == NULL)
+{
+	printf("The File 'car.dat' does not exist, you'll need to input cars to the list\n");
 	
+}
+
+else
+{
+	printf("The file 'car.dat' does exist.\n");
+	struct LinearNode* current = front;
+	while (current != NULL)
+	{
+		fwrite(current->element, sizeof(struct Car), 1, fptr);
+		current = current->link;
+	}
+
+	printf("Cars are loaded\n");
+	fclose(fptr);
+}
 	int option = 0;
 
 	while (1)
