@@ -6,7 +6,7 @@
 #include <stdlib.h>
 #include <stdbool.h>
 #include <string.h>
-#define false 0 // Why do i have to add this so the errors on the return statement are not mark as erros?
+
 
 #struct Car
 {
