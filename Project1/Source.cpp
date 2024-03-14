@@ -174,7 +174,7 @@ void sellCar()
 		struct LinearNode* previous = NULL;	
 		
 		printf("Enter the Registration number you wish to sell");
-		scanf("%9s", Registration);
+		scanf("%9s", &Registration);
 
 		while(current != NULL)
 		{
@@ -225,7 +225,12 @@ void viewAllCars()
 	current = front;
 	while(current !=NULL)
 	{
-		("Registration %s, Make and Model %s, Colour %s, Previous Owners %d",  current->element->Registration, current->element->make_model, current->element->colour, current->element->previous_owners);
+	printf("Registration: %s\n", current->element->Registration);
+        printf("Make and Model: %s\n", current->element->make_model);
+        printf("Colour: %s\n", current->element->colour);
+        printf("Previous Owners: %d\n", current->element->previous_owners);
+        printf("\n");
+		return;
 		current = current->link;
 	}
 	if (isEmpty())
