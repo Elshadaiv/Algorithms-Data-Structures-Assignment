@@ -215,7 +215,50 @@ void sellCar()
 
 void reserveCar()
 {
+	int option = 0;
+		printf("1) Reserve a car\n");
+		printf("2) Unreserve a car\n");
+		printf("Wish what you like to choose\n");
+		scanf("%d",&option);
 
+		if(option == 1)
+		{
+	 		const char* Registration;
+			struct LinearNode* current = front;
+
+			printf("Enter the Registration number of the car you wish to reserve\n");
+			scanf("%8s", &Registration);
+
+			while(current)
+			{
+				if(strcmp(current ->element-> Registration, Registration) == 0)
+			{
+				if(current->element->reserved)
+				{
+					printf("Car is already reserved\n");
+
+				}
+				else 
+				{
+					printf("Enter deposit amount\n");
+					scanf("%d", &current->element->reserveAmount);
+				
+				if(current->element->reserveAmount < 500.00 || current->element->reserveAmount >1500.0)
+				{
+					printf("This amount is invalid\n");
+				}
+			else {
+				current->element->reserved = true;
+				printf("Thank you, this car is now reserved\n");
+				}
+		}
+				return;
+			}
+		current = current->link;
+				}
+
+		}
+}
 }
 
 void viewAllCars()
