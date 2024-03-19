@@ -76,99 +76,115 @@ bool isEmpty() {
 }
 
 void addCar() // add car method
-{	
+{
 	int i;
-	int ReservedOpt= 0;
+	int ReservedOpt = 0;
+	struct LinearNode* carNode;
+	struct Car* anElement;
+
+
+	for (i = 0; i < SIZE; i++) // 5 cars get added into list
+	{
 
 	struct LinearNode* carNode = (struct LinearNode*)malloc(sizeof(struct LinearNode));
+	if (carNode == NULL)
+	{
+		printf("There's no space for new cars");
+		return;
+	}
+
 	struct Car* anElement = (struct Car*)malloc(sizeof(struct Car));
+	if (anElement == NULL)
+	{
+		printf("There's no space for new cars");
+		free(carNode);
+		return;
+	}
 
-			anElement->reserveAmount = 0.0; // reserved amount is 0
-
-
-
-for(i=0; i< SIZE; i++) // 5 cars get added into list
-{
 	printf("Enter car registration by (yyDxnnnn)\n");
-	scanf("%8s",&anElement->Registration); //add car by the reg
+	scanf(" %8s", anElement->Registration); //add car by the reg
+	anElement->Registration[8] = '\0';
 
-
-	if(strlen(anElement->Registration)!=8) // reg string is 8 characters long
+	if (strlen(anElement->Registration) != 8) // reg string is 8 characters long
 	{
 		printf("This is an invalid registration, try again\n");
 		free(anElement);
 		free(carNode);
-	return;
-
+		return;;
 	}
-	printf("Enter the car make and model\n");
-	scanf("%s",&anElement->make_model); // make and model
+		printf("Enter the car make and model\n");
+		scanf("%s", &anElement->make_model); // make and model
 
 
-	printf("Enter the car colour\n");
-	scanf("%s",&anElement->colour); // colour
+		printf("Enter the car colour\n");
+		scanf("%s", &anElement->colour); // colour
 
-do{
-	printf("Enter the number of previous owners (between 0-3)\n");
-	scanf("%d", &anElement->previous_owners); // previous owners
+		do {
+			printf("Enter the number of previous owners (between 0-3)\n");
+			scanf("%d", &anElement->previous_owners); // previous owners
 
-	if(anElement-> previous_owners < 0 || anElement->previous_owners > 3)
-	{
-		printf("This is a invalid number of previous owners\n");
-		return;
-	}// if the amount of previous oweners in the list car is under 0 or 3 the error message will occur
-}while(anElement-> previous_owners < 0 || anElement->previous_owners > 3);
+			if (anElement->previous_owners < 0 || anElement->previous_owners > 3)
+			{
+				printf("This is a invalid number of previous owners\n");
+				return;
+			}// if the amount of previous oweners in the list car is under 0 or 3 the error message will occur
+		} while (anElement->previous_owners < 0 || anElement->previous_owners > 3);
 
-do{
-	printf("Is car reserved? 1 = Yes, 2 = No\n");
-	scanf("%d",&ReservedOpt);
+		do {
+			printf("Is car reserved? 1 = Yes, 2 = No\n");
+			scanf("%d", &ReservedOpt);
 
-	if(ReservedOpt== 1)
-	{
-	printf("Reserved amount\n");
-	scanf("%d", &anElement->reserveAmount);
-	
-	if(anElement->reserveAmount < 500.00 || anElement->reserveAmount >1500.0)
-	{
-		printf("This amount is invalid\n");
-		
-	}
-	else {
-		printf("Thank you, this car is now reserved\n");
-	}
-	}
-}while (anElement->reserved == 1 && (anElement->reserveAmount < 500.00 || anElement->reserveAmount > 1500.0));
+			if (ReservedOpt == 1)
+			{
+				anElement->reserveAmount = 0.0; // reserved amount is 0
+				printf("Reserved amount\n");
+				scanf("%d", &anElement->reserveAmount);
 
-	if(ReservedOpt== 2)
-	{
-		printf("This car is now stored! Thank you!\n");
-		return;
-	}
-}
- // if the reserved car in the list is between 500/1500 i will be stored
-carNode->element = anElement;
+				if (anElement->reserveAmount < 500.00 || anElement->reserveAmount >1500.0)
+				{
+					printf("This amount is invalid\n");
 
-	if(anElement == NULL)
-	{
-	printf("There's no space for new cars");
-	} // null = no space for car
-	else {
+				}
+				else {
+					printf("Thank you, this car is now reserved\n");
+					anElement->reserved = true;// if the reserved car in the list is between 500/1500 i will be stored
+
+
+				}
+			}
+		} while (ReservedOpt == 1 && (anElement->reserveAmount < 500.00 || anElement->reserveAmount > 1500.0));
+
+		if (ReservedOpt == 2)
+		{
+			printf("This car is now stored! Thank you!\n");
+			anElement->reserved = false;
+
+			return;
+		}
+		carNode->element = anElement;
 		carNode->link = NULL;
-		 	
-	
-			if (front== NULL)  
+
+		
+		if (carNode == NULL)
+		{
+			printf("There's no space for new cars");
+		} // null = no space for car
+		else {
+
+			if (front == NULL)
 			{
 				front = carNode;
 				last = carNode;
-		    }
+			}
 			else
-			 {
+			{
 				last->link = carNode;
 				last = carNode;
 
-}	
-}
-}
+			}
+		}
+	}
+
 
 
 void sellCar()
@@ -221,73 +237,72 @@ void sellCar()
 
 void reservedCar()
 {	
-	const char* Registration;
-	struct LinearNode* current = front;
+		char Registration[9];
+	struct LinearNode* carNode = front;
 
 	int option = 0;
-		printf("1) Reserve a car\n");
-		printf("2) Unreserve a car\n");
-		printf("Wish what you like to choose\n");
-		scanf("%d",&option); // asks the user to reserve or unreserve a car
+	printf("1) Reserve a car\n");
+	printf("2) Unreserve a car\n");
+	printf("Wish what you like to choose\n");
+	scanf("%d", &option); // asks the user to reserve or unreserve a car
 
-		if(option == 1)
+	if (option == 1)
+	{
+		printf("Enter the Registration number of the car you wish to reserve\n");
+		scanf("%8s", Registration); // enter the registration
+
+		while (carNode != NULL)
 		{
-			printf("Enter the Registration number of the car you wish to reserve\n");
-			scanf("%8s", &Registration); // enter the registration
-
-			while(current)
+			if (strcmp(carNode->element->Registration, Registration) == 0)
 			{
-				if(strcmp(current ->element-> Registration, Registration) == 0)
-			{
-				if(current->element->reserved)
+				if (carNode->element->reserved)
 				{
 					printf("Car is already reserved\n");
-
 				}
-				else 
+				else
 				{
 					printf("Enter deposit amount\n");
-					scanf("%d", &current->element->reserveAmount); /// this car gets reserved with the amount 
-				
-				if(current->element->reserveAmount < 500.00 || current->element->reserveAmount >1500.0)
-				{
-					printf("This amount is invalid\n");
-				}
-			else {
-				current->element->reserved = true;
-				printf("Thank you, this car is now reserved\n"); //returns true and the car is now reserved
-				}
-		}
-				return;
-			}
-		current = current->link;
-				}
+					scanf("%f", &carNode->element->reserveAmount); /// this car gets reserved with the amount 
 
-		}
-
-		if(option == 2)
-		{
-			printf("Enter the registration number of the car you wish to unreserve\n");
-			scanf("%8s",&Registration);
-
-			while(current)
-			{
-				if(strcmp(current->element->Registration, Registration) == 0)
-				{
-					if(current->element->reserved)
+					if (carNode->element->reserveAmount < 500.00 || carNode->element->reserveAmount >1500.0)
 					{
-						current->element->reserved = false;
-						printf("Car '%s' is now  unreserved\n", Registration); // return false and the car becomes unreserved 
-
+						printf("This amount is invalid\n");
 					}
 					else {
-						printf("This car is not reserved");
-						return;
+						carNode->element->reserved = true;
+						printf("Thank you, this car is now reserved\n"); //returns true and the car is now reserved
 					}
 				}
-				current = current->link;
+				return;
 			}
+			carNode = carNode->link;
 		}
+		printf("There is no car with this registration.\n");
+	}
+
+	if (option == 2)
+	{
+		printf("Enter the registration number of the car you wish to unreserve\n");
+		scanf("%8s", Registration);
+
+		while (carNode != NULL)
+		{
+			if (strcmp(carNode->element->Registration, Registration) == 0)
+			{
+				if (carNode->element->reserved)
+				{
+					carNode->element->reserved = false;
+					printf("Car '%s' is now unreserved\n", Registration); // return false and the car becomes unreserved 
+				}
+				else {
+					printf("This car is not reserved");
+				}
+				return;
+			}
+			carNode = carNode->link;
+		}
+		printf("There is no car with this registration.\n");
+	}
 }
 
 void viewAllCars()
@@ -349,40 +364,49 @@ void viewSpecificCar()
 
 
 void ReservedDiscount()
-	{ //  speical feature is that the car reserved gets a 10% discount on the already reserved amount they had on,
-		char Registration[9];
-		struct LinearNode* current = front;
-		float discountAmount;
+	void ReservedDiscount()
+{ //  speical feature is that the car reserved gets a 10% discount on the already reserved amount they had on,
+	char Registration[9];
+	struct LinearNode* current = front;
+	int found = 0;
 
-		printf("Enter the Registration of the reserved car you want to apply a discount for\n");
-		scanf("%8s", Registration);
+	printf("Enter the Registration of the reserved car you want to apply a discount for\n");
+	scanf("%8s", Registration);
 
-		while(current !=NULL)
-		{
-			if(strcmp(current->element->Registration, Registration) == 0)
-			{
-				if(current->element->reserved)
-				{
-					current->element->reserveAmount *=0.10;
-					current->element->reserveAmount -= discountAmount;
-					printf("A 10 Percent discount was applied to the reserved amoint for car with registration '%s'.\n New reserved amount is %.2f\n", Registration, current->element->reserveAmount);
-
-				}
-				else
-				{
-					printf("Car with the registration '%s' is not reserved.\n", Registration);
-					return;
-				}
-			}
-			current = current->link;
-
-			if (isEmpty())
-		{
-			printf("There is no cars with this registration.\n");
-			return;
-		}
-		}
+	if (isEmpty())
+	{
+		printf("There is no cars with this registration.\n");
+		return;
 	}
+
+	while (current != NULL)
+	{
+		if (strcmp(current->element->Registration, Registration) == 0)
+		{
+			found = 1;
+			if (current->element->reserved)
+			{
+				current->element->reserveAmount *= 0.90;
+
+				printf("A 10 Percent discount was applied to the reserved amoint for car with registration '%s'.\n New reserved amount is %.2f\n", Registration, current->element->reserveAmount);
+				return;
+
+			}
+			else
+			{
+				printf("Car with the registration '%s' is not reserved.\n", Registration);
+				return;
+			}
+		}
+		current = current->link;
+
+
+	}
+	if (!found)
+	{
+		printf("There is no cars with this registration\n");
+	}
+}
 
 void exit() // exit method
 {
